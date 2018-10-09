@@ -11,8 +11,7 @@
 	<body>
 		<script src="js/three.js"></script>
 		<script>
-
-      var unused = 3.141
+      var speed = 0.01
       var angle = 3.141
       var scene = new THREE.Scene()
       var camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 0.1, 1000 )
@@ -21,7 +20,7 @@
       document.body.appendChild( renderer.domElement )
 
       var light = new THREE.HemisphereLight( 0x66ff66, 0xff66ff, 1 );
-scene.add( light );
+			scene.add( light );
 
       var geometry = new THREE.CylinderBufferGeometry( 1, 1, 1, 50, 100, false, 0, angle );
       var material = new THREE.MeshToonMaterial();
@@ -30,14 +29,19 @@ scene.add( light );
 
       camera.position.z = 5;
 
+			function inc() {
+				speed = speed + 0.01
+				console.log("speed: " + speed)
+			}
       function animate() {
 
-        cylinder.rotation.y -= 0.01;
+        cylinder.rotation.y -= speed;
         cylinder.rotation.x -= 0.005;
       	requestAnimationFrame( animate );
       	renderer.render( scene, camera );
       }
       animate();
 		</script>
+		<h1 onClick="inc()">Increase</h1>
 	</body>
 </html>
